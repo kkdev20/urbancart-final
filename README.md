@@ -1,6 +1,6 @@
 # 🛍️ UrbanCart - Modern E-commerce Platform
 
-![UrbanCart Banner](https://via.placeholder.com/1200x400/3B82F6/FFFFFF?text=UrbanCart+E-commerce)
+UrbanCart - Modern E-commerce Platform
 
 **UrbanCart** adalah platform e-commerce modern yang dibangun dengan **Next.js 14**, menawarkan pengalaman belanja online yang cepat, responsive, dan user-friendly.
 
