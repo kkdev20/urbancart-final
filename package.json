@@ -7,5 +7,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test:e2e": "npm run build && npm run start & wait-on http://localhost:3000 && cypress run"
+  },
+  "dependencies": {
+  "next": "14.2.4"
   }
 }
