@@ -1,32 +1,23 @@
-// app/search/page.tsx - FIXED VERSION
+// app/search/page.tsx
 "use client";
 
-import React, { useEffect, useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
-import { useSearch } from '../../context/SearchContext';
-import { useProducts } from '../../hooks/useProducts';
-import ProductCard from '../../components/product/ProductCard';
-import ProductGridSkeleton from '../../components/product/ProductGridSkeleton';
+import React from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useSearch } from '@/context/SearchContext';
+import { useProducts } from '@/hooks/useProducts';
+import ProductCard from '@/components/product/ProductCard';
+import ProductGridSkeleton from '@/components/product/ProductGridSkeleton';
 import { Filter, X } from 'lucide-react';
-import Button from '../../components/ui/Button';
+import Button from '@/components/ui/Button';
 
 export default function SearchPage() {
-  const router = useRouter();
-  const [query, setQuery] = useState('');
+  const searchParams = useSearchParams();
+  const query = searchParams.get('q') || '';
   const { filters, setSearchQuery, clearFilters } = useSearch();
   const { products, loading } = useProducts();
 
-  // Get query from URL on client side only
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const urlQuery = urlParams.get('q') || '';
-      setQuery(urlQuery);
-    }
-  }, []);
-
   // Update search context dengan query dari URL
-  useEffect(() => {
+  React.useEffect(() => {
     if (query) {
       setSearchQuery(query);
     }
@@ -49,7 +40,7 @@ export default function SearchPage() {
   });
 
   // Sort products
-  const sortedProducts = useMemo(() => {
+  const sortedProducts = React.useMemo(() => {
     const sorted = [...filteredProducts];
     
     switch (filters.sortBy) {
