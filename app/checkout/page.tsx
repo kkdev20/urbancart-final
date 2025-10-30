@@ -3,13 +3,13 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCart } from '@/context/CartContext';
-import { useCheckout } from '@/context/CheckoutContext';
-import CheckoutStepper from '@/components/checkout/CheckoutStepper';
-import ShippingForm from '@/components/checkout/ShippingForm';
-import PaymentForm from '@/components/checkout/PaymentForm';
-import OrderReview from '@/components/checkout/OrderReview';
-import { CheckoutProvider } from '@/context/CheckoutContext';
+import { useCart } from '../../context/CartContext';
+import { useCheckout } from '../../context/CheckoutContext';
+import CheckoutStepper from '../../components/checkout/CheckoutStepper';
+import ShippingForm from '../../components/checkout/ShippingForm';
+import PaymentForm from '../../components/checkout/PaymentForm';
+import OrderReview from '../../components/checkout/OrderReview';
+import { CheckoutProvider } from '../../context/CheckoutContext';
 
 function CheckoutContent() {
   const router = useRouter();

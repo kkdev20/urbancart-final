@@ -1,10 +1,10 @@
 // app/cart/page.tsx - UPDATED BAHASA INDONESIA
 "use client";
 
-import { useCart } from '@/context/CartContext';
-import CartItem from '@/components/cart/CartItem';
-import CartSummary from '@/components/cart/CartSummary';
-import Button from '@/components/ui/Button';
+import { useCart } from '../../context/CartContext';
+import CartItem from '../../components/cart/CartItem';
+import CartSummary from '../../components/cart/CartSummary';
+import Button from '../../components/ui/Button';
 import Link from 'next/link';
 import { ShoppingBag, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -80,7 +80,7 @@ export default function CartPage() {
         {/* Cart Items */}
         <div className="lg:col-span-2">
           <div className="space-y-4">
-            {items.map((item) => (
+           {items.map((item: any) => (
               <CartItem
                 key={item.product.id}
                 item={item}

@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import { Minus, Plus, X } from 'lucide-react';
 import Button from '@/components/ui/Button';
-import { CartItem as CartItemType } from '@/types/cart';
+type CartItemType = any;
 import { useState } from 'react';
 
 interface CartItemProps {
