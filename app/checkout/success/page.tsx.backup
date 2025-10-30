@@ -1,17 +1,24 @@
-// app/checkout/success/page.tsx - UPDATED BAHASA INDONESIA
+// app/checkout/success/page.tsx - FIXED VERSION
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import Button from '@/components/ui/Button';
-import Confetti from '@/components/checkout/Confetti';
+import Button from '../../components/ui/Button';
+import Confetti from '../../components/checkout/Confetti';
 import { Check, Package, Truck, Home, ShoppingBag } from 'lucide-react';
 
 export default function CheckoutSuccessPage() {
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get('orderId');
+  const [orderId, setOrderId] = useState('');
   const [showConfetti, setShowConfetti] = useState(true);
+
+  // Get orderId from URL on client side only
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlOrderId = urlParams.get('orderId') || 'PESANAN-' + Date.now().toString().slice(-8);
+      setOrderId(urlOrderId);
+    }
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,7 +29,7 @@ export default function CheckoutSuccessPage() {
   }, []);
 
   const orderDetails = {
-    id: orderId || 'PESANAN-' + Date.now().toString().slice(-8),
+    id: orderId,
     date: new Date().toLocaleDateString('id-ID', {
       year: 'numeric',
       month: 'long',
