@@ -36,7 +36,7 @@ function CheckoutContent() {
 
   if (items.length === 0 && !orderComplete) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto text-center">
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-8">
         <h1 className="text-2xl font-bold text-yellow-800 mb-4">Keranjang Anda kosong</h1>
@@ -77,7 +77,7 @@ function CheckoutContent() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Header */}
  <div className="text-center mb-8">
   <h1 className="text-3xl font-bold text-gray-900 mb-2">Checkout</h1>

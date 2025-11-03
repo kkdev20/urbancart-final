@@ -26,18 +26,18 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
 
   const renderStars = (rate: number) => {
     return (
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center space-x-0.5">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            className={`h-4 w-4 ${
+            className={`h-3.5 w-3.5 transition-all duration-200 ${
               i < Math.floor(rate) 
-                ? 'fill-yellow-400 text-yellow-400' 
+                ? 'fill-yellow-400 text-yellow-400 drop-shadow-sm' 
                 : 'text-gray-300'
             }`}
           />
         ))}
-        <span className="text-sm text-gray-500 ml-1">({rating.count})</span>
+        <span className="text-xs text-gray-500 ml-1">({rating.count})</span>
       </div>
     );
   };
@@ -62,23 +62,23 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
   // Grid View (default)
   if (variant === 'grid') {
     return (
-      <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
+      <div className="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group border border-gray-100 hover:border-blue-200 flex flex-col h-full">
         {/* Product Image */}
-        <div className="relative h-64 overflow-hidden bg-gray-100">
+        <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex-shrink-0">
           <Link href={`/products/${id}`}>
             <Image
               src={imageSrc}
               alt={title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              className="object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 20vw"
               onError={() => setImageError(true)}
             />
           </Link>
           
           {/* Category Badge */}
           <div className="absolute top-2 left-2">
-            <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium capitalize">
+            <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-2 py-0.5 rounded-full text-xs font-semibold capitalize shadow-lg backdrop-blur-sm">
               {category}
             </span>
           </div>
@@ -86,7 +86,7 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
           {/* In Cart Badge */}
           {isInCart && (
             <div className="absolute top-2 right-2">
-              <span className="bg-green-500 text-white px-2 py-1 rounded text-xs font-medium flex items-center space-x-1">
+              <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-2 py-0.5 rounded-full text-xs font-semibold flex items-center space-x-1 shadow-lg backdrop-blur-sm">
                 <Check className="h-3 w-3" />
                 <span>In Cart</span>
               </span>
@@ -95,20 +95,22 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
         </div>
 
         {/* Product Info */}
-        <div className="p-4">
-          <Link href={`/products/${id}`}>
-            <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 h-12 hover:text-blue-600 cursor-pointer">
+        <div className="p-4 flex flex-col flex-1 min-h-0">
+          <Link href={`/products/${id}`} className="flex-shrink-0">
+            <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 h-10 hover:text-blue-600 cursor-pointer transition-colors duration-200 text-sm leading-tight">
               {title}
             </h3>
           </Link>
           
           {/* Rating */}
-          {renderStars(rating.rate)}
+          <div className="mb-3 flex-shrink-0">
+            {renderStars(rating.rate)}
+          </div>
           
           {/* Price & Add to Cart */}
-          <div className="flex items-center justify-between mt-4">
-            <div>
-              <span className="text-2xl font-bold text-gray-900">
+          <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100 flex-shrink-0">
+            <div className="flex-shrink-0">
+              <span className="text-base font-bold text-gray-900">
                 ${price}
               </span>
             </div>
@@ -117,24 +119,26 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
               size="sm"
               onClick={handleAddToCart}
               disabled={isAdding || isInCart}
-              className={`flex items-center space-x-1 ${
-                isInCart ? 'bg-green-500 hover:bg-green-600' : ''
+              className={`flex items-center space-x-1 flex-shrink-0 ${
+                isInCart 
+                  ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' 
+                  : ''
               }`}
             >
               {isAdding ? (
                 <>
                   <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Menambah...</span>
+                  <span className="text-xs">Menambah...</span>
                 </>
               ) : isInCart ? (
                 <>
                   <Check className="h-4 w-4" />
-                  <span>Ditambahkan</span>
+                  <span className="text-xs">Ditambahkan</span>
                 </>
               ) : (
                 <>
                   <ShoppingCart className="h-4 w-4" />
-                  <span>Tambah</span>
+                  <span className="text-xs">Tambah</span>
                 </>
               )}
             </Button>
@@ -146,17 +150,17 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
 
   // List View
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
+    <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden group border border-gray-100 hover:border-blue-200">
       <div className="flex">
         {/* Product Image */}
-        <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden bg-gray-100">
+        <div className="relative w-40 h-40 flex-shrink-0 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
           <Link href={`/products/${id}`}>
             <Image
               src={imageSrc}
               alt={title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-              sizes="128px"
+              className="object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+              sizes="160px"
               onError={() => setImageError(true)}
             />
           </Link>
@@ -167,27 +171,29 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
           <div>
             <div className="flex items-start justify-between mb-2">
               <Link href={`/products/${id}`}>
-                <h3 className="font-semibold text-gray-800 text-lg hover:text-blue-600 cursor-pointer line-clamp-2">
+                <h3 className="font-semibold text-gray-900 text-base hover:text-blue-600 cursor-pointer line-clamp-2 transition-colors duration-200 leading-tight">
                   {title}
                 </h3>
               </Link>
-              <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium capitalize ml-2 flex-shrink-0">
+              <span className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-1 rounded-full text-xs font-semibold capitalize ml-3 flex-shrink-0 shadow-md">
                 {category}
               </span>
             </div>
             
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+            <p className="text-gray-600 text-sm mb-2 line-clamp-2 leading-relaxed">
               {description}
             </p>
             
             {/* Rating */}
-            {renderStars(rating.rate)}
+            <div className="mb-2">
+              {renderStars(rating.rate)}
+            </div>
           </div>
 
           {/* Price & Add to Cart */}
-          <div className="flex items-center justify-between mt-3">
+          <div className="flex items-center justify-between mt-2 pt-3 border-t border-gray-100">
             <div>
-              <span className="text-2xl font-bold text-gray-900">
+              <span className="text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                 ${price}
               </span>
             </div>
@@ -197,7 +203,9 @@ export default function ProductCard({ product, variant = 'grid' }: ProductCardPr
               onClick={handleAddToCart}
               disabled={isAdding || isInCart}
               className={`flex items-center space-x-1 ${
-                isInCart ? 'bg-green-500 hover:bg-green-600' : ''
+                isInCart 
+                  ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' 
+                  : ''
               }`}
             >
               {isAdding ? (

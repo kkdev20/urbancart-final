@@ -70,14 +70,14 @@ export default function SearchPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         <ProductGridSkeleton count={8} />
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Search Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
@@ -112,7 +112,7 @@ export default function SearchPage() {
 
       {/* Results Grid */}
       {sortedProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
           {sortedProducts.map(product => (
             <ProductCard
               key={product.id}

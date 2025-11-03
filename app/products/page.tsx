@@ -51,38 +51,45 @@ export default function ProductsPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         <ProductGridSkeleton count={12} />
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Page Header */}
-<div className="flex items-center justify-between mb-8">
-  <div>
-    <h1 className="text-3xl font-bold text-gray-900">Semua Produk</h1>
-    <p className="text-gray-600 mt-2">
-      {sortedProducts.length} produk ditemukan
-      {filters.query && ` untuk "${filters.query}"`}
-    </p>
-  </div>
-
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Semua Produk</h1>
+          <p className="text-gray-600 text-lg">
+            {sortedProducts.length} produk ditemukan
+            {filters.query && ` untuk "${filters.query}"`}
+          </p>
+        </div>
 
         {/* View Controls */}
         <div className="flex items-center space-x-4">
           {/* View Mode Toggle */}
-          <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+          <div className="flex border-2 border-gray-200 rounded-xl overflow-hidden shadow-sm">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600'}`}
+              className={`p-2.5 transition-all duration-200 ${
+                viewMode === 'grid' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
+                  : 'bg-white text-gray-600 hover:bg-gray-50'
+              }`}
             >
               <Grid className="h-4 w-4" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-white text-gray-600'}`}
+              className={`p-2.5 transition-all duration-200 ${
+                viewMode === 'list' 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
+                  : 'bg-white text-gray-600 hover:bg-gray-50'
+              }`}
             >
               <List className="h-4 w-4" />
             </button>
@@ -127,7 +134,7 @@ export default function ProductsPage() {
           {sortedProducts.length > 0 ? (
             <div className={
               viewMode === 'grid' 
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6"
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch"
                 : "space-y-4"
             }>
               {sortedProducts.map(product => (
