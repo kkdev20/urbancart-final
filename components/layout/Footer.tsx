@@ -91,8 +91,19 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-blue-500 mt-12 pt-8 text-center">
-          <p className="text-blue-100">
+          <p className="text-blue-100 mb-2">
             &copy; 2024 UrbanCart. Hak cipta dilindungi.
+          </p>
+          <p className="text-blue-200 text-sm">
+            Powered by{' '}
+            <a 
+              href="https://wistack.site" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors duration-200 font-semibold"
+            >
+              wistack.site
+            </a>
           </p>
         </div>
       </div>
